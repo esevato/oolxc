@@ -1,4 +1,6 @@
 # Open Observe in a linux Container on Proxmox
+>PREREQUISITE<br>
+Must have Linux Container up and running.<br> I ran through this with a fresh debian 11 container on proxmox
 
 Lets start by creating some directories ...
 >mkdir /etc/oolxc <br>
