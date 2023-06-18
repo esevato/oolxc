@@ -50,7 +50,7 @@ Now lets configure the service
 nano /usr/lib/systemd/system/openobserve.service
 ```
 Copy and edit the following to your liking 
->Make sure your Environment file and dinary locations are properly mapped<br>
+>Make sure your Environment file and binary locations are properly mapped<br>
 >If you created the directories as shown above this should work fine
 ```
 [Unit]
