@@ -3,10 +3,9 @@
 Must have Linux Container up and running.<br> I ran through this with a fresh debian 11 container on proxmox
 
 Lets start by creating some directories ...
->mkdir /etc/oolxc <br>
->mkdir /usr/share/oolxc<br>
+>mkdir /usr/share/openobserve<br>
 >mkdir /data<br>
->mkdir /data/oolxc<br>
+>mkdir /data/openobserve<br>
 
 Let's grab the binary
 ```
@@ -14,7 +13,7 @@ wget https://github.com/openobserve/openobserve/releases/download/v0.4.7/openobs
 ```
 unzip it
 ```
-tar -zxvf openobserve-v0.4.7-linux-amd64.tar.gz -C /usr/share/oolxc
+tar -zxvf openobserve-v0.4.7-linux-amd64.tar.gz -C /usr/share/openobserve
 ```
 now ditch the tar
 ```
@@ -57,7 +56,7 @@ Wants=network-online.target
 Type=simple
 LimitNOFILE=65535
 EnvironmentFile=/etc/openobserve.env
-ExecStart=/usr/share/oolxc
+ExecStart=/usr/share/openobserve
 ExecStop=/bin/kill -s QUIT $MAINPID
 Restart=on-failure
 
