@@ -8,33 +8,26 @@ Lets start by creating some directories ...
 >mkdir /data<br>
 >mkdir /data/oolxc<br>
 
-now lets move to where we want the binary to live 
-```
-cd /usr/share/oolxc
-```
-Now grab the binary
+Let's grab the binary
 ```
 wget https://github.com/openobserve/openobserve/releases/download/v0.4.7/openobserve-v0.4.7-linux-amd64.tar.gz
 ```
 unzip it
 ```
-tar -zxvf openobserve-v0.4.7-linux-amd64.tar.gz
+tar -zxvf openobserve-v0.4.7-linux-amd64.tar.gz -C /usr/share/oolxc
 ```
-remove the archive so you just have the binary
+now ditch the tar
 ```
 rm openobserve-v0.4.7-linux-amd64.tar.gz
 ```
-get back home
-```
-cd ~
-```
-create your environment variables
+Now create your environment variables
 ```
 nano /etc/openobserve.env
 ```
 
 copy and edit the following to your liking
->This will be your login information. Make sure your data directory matches what you created previously
+## This will be your login information. 
+>Make sure your data directory matches what you created previously
 ```
 ZO_ROOT_USER_EMAIL = "root@example.com"
 ZO_ROOT_USER_PASSWORD = "Complexpass#123"
