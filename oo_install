@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+# Copyright (c) 2023 esevato
+# Author: esevato 
+# License: Apache2
+# https://github.com/esevato/oolxc/new/main/LICENSE
+
+source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
+color
+verb_ip6
+catch_errors
+setting_up_container
+network_check
+update_os
+
+msg_info "Installing Dependencies"
+$STD apt-get install -y curl
+$STD apt-get install -y sudo
+$STD apt-get install -y mc
+msg_ok "Installed Dependencies"
+
+msg_info "Installing OpenObserve"
+mkdir /etc/oolxc
+mkdir /usr/share/oolxc
+mkdir /data
+mkdir /data/oolxc
+wget -qL https://github.com/openobserve/openobserve/releases/download/v0.4.7/openobserve-v0.4.7-linux-amd64.tar.gz
+tar -zxvf openobserve-v0.4.7-linux-amd64.tar.gz -C /usr/share/oolxc
+rm /usr/share/oolxcopenobserve-v0.4.7-linux-amd64.tar.gz
+msg_ok "Installed OpenObserve"
+
+msg_info "Setting Environment Variables"
+cat <<EOF >/etc/openobserve.env
+ZO_ROOT_USER_EMAIL = "root@example.com"
+ZO_ROOT_USER_PASSWORD = "Complexpass#123"
+ZO_DATA_DIR = "/data/oolxc"
+EOF
+msg_info "Environment SET"
+
+msg_info "Creating Service"
+service_path="/usr/lib/systemd/system/openobserve.service"
+echo "[Unit]
+Description=The OpenObserve server
+After=syslog.target network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+LimitNOFILE=65535
+EnvironmentFile=/etc/openobserve.env
+ExecStart=/usr/share/oolxc
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target" >$service_path
+chmod +x /usr/share/oolxc/* && chown root /usr/share/oolxc/*
+systemctl enable --now -q openobserve.service
+msg_ok "Created Service"
+
+motd_ssh
+customize
+
+msg_info "Cleaning up"
+$STD apt-get autoremove
+$STD apt-get autoclean
+msg_ok "Cleaned"
