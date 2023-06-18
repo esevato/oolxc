@@ -3,9 +3,9 @@
 Must have Linux Container up and running.<br> I ran through this with a fresh debian 11 container on proxmox
 
 Lets start by creating some directories ...
->mkdir /usr/share/openobserve<br>
+>mkdir /usr/share/oolxc<br>
 >mkdir /data<br>
->mkdir /data/openobserve<br>
+>mkdir /data/oolxc<br>
 
 Let's grab the binary
 ```
@@ -13,7 +13,7 @@ wget https://github.com/openobserve/openobserve/releases/download/v0.4.7/openobs
 ```
 unzip it
 ```
-tar -zxvf openobserve-v0.4.7-linux-amd64.tar.gz -C /usr/share/openobserve
+tar -zxvf openobserve-v0.4.7-linux-amd64.tar.gz -C /usr/share/oolxc
 ```
 now ditch the tar
 ```
@@ -21,7 +21,7 @@ rm openobserve-v0.4.7-linux-amd64.tar.gz
 ```
 Now create your environment variables
 ```
-nano /etc/openobserve.env
+nano /etc/oolxc.env
 ```
 
 copy and edit the following to your liking
@@ -41,7 +41,7 @@ ctrl-y
 ```
 Now lets configure the service
 ```
-nano /usr/lib/systemd/system/openobserve.service
+nano /usr/lib/systemd/system/oolxc.service
 ```
 Copy and edit the following to your liking 
 >Make sure your Environment file and binary locations are properly mapped<br>
@@ -55,8 +55,8 @@ Wants=network-online.target
 [Service]
 Type=simple
 LimitNOFILE=65535
-EnvironmentFile=/etc/openobserve.env
-ExecStart=/usr/share/openobserve
+EnvironmentFile=/etc/oolxc.env
+ExecStart=/usr/share/oolxc/openobserve
 ExecStop=/bin/kill -s QUIT $MAINPID
 Restart=on-failure
 
@@ -66,12 +66,12 @@ WantedBy=multi-user.target
 Fire up the service
 ```
 systemctl daemon-reload
-systemctl enable openobserve
-systemctl start openobserve
+systemctl enable oolxc
+systemctl start oolxc
 ```
 see if its running
 ```
-systemctl status openobserve
+systemctl status oolxc
 ```
 to test service
 ```
