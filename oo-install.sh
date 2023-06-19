@@ -49,6 +49,6 @@ systemctl enable oo
 echo -e start oo service
 systemctl start oo
 systemctl status oo
-echo -e http://<yourIP>:5080
+echo -e http://{ip4=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)}:5080
 echo -e login = oo@example.com
 echo -e password = OpenObserve
