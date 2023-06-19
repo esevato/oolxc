@@ -49,6 +49,6 @@ systemctl enable oo
 echo -e start oo service
 systemctl start oo
 systemctl status oo
-echo -e you can now log in at http://<yourIP>:5080
+echo -e http://<yourIP>:5080
 echo -e login = oo@example.com
 echo -e password = OpenObserve
