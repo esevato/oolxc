@@ -1,3 +1,6 @@
+tteck has added a script to create the container and install OO as a part of his Proxmox helper respository ...
+https://tteck.github.io/Proxmox/
+
 # Open Observe in a linux Container on Proxmox
 >PREREQUISITE<br>
 Must have Linux Container up and running.<br> I ran through this with a fresh debian 11 container on proxmox
@@ -33,12 +36,13 @@ ZO_ROOT_USER_PASSWORD = "Complexpass#123"
 ZO_DATA_DIR = "/data/oolxc"
 ```
 Exit and save
-```
+
 ctrl-x
-```
-```
+
 y
-```
+
+Enter
+
 Now lets configure the service
 ```
 nano /usr/lib/systemd/system/oolxc.service
