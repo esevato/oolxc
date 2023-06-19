@@ -37,7 +37,7 @@ Exit and save
 ctrl-x
 ```
 ```
-ctrl-y
+y
 ```
 Now lets configure the service
 ```
