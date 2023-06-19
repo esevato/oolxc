@@ -8,7 +8,6 @@ while true; do
     *) echo "Please answer yes or no." ;;
     esac
 done
-
 echo -e updating container
 apt-get update
 echo -e installing dependancies
@@ -53,9 +52,6 @@ echo -e start oolxc service
 systemctl start oolxc
 msg_ok "service started"
 systemctl status oolxc
-echo -e Check Health
-curl -v http://localhost:5080/healthz
-echo -e should have returned {"status":"ok"}
-echo -e you can now log in at http://{IP}:5080
+echo -e you can now log in at http://<yourIP>:5080
 echo -e login = oolxc@example.com
 echo -e password = OpenObserveLXC
